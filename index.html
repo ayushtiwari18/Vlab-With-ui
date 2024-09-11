@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oceanic Virtual Lab</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="ocean-background"></div>
+    <div class="waves"></div>
+    <div class="waves"></div>
+    <div class="content-wrapper">
+        <aside class="sidebar">
+            <h2>Experiments</h2>
+            <ul id="experiment-list">
+                <!-- Experiment list will be populated dynamically -->
+            </ul>
+        </aside>
+        <main class="main-content">
+            <div class="glass-container">
+                <h1 id="experiment-title">Welcome to Oceanic Virtual Lab</h1>
+                <div class="tabs">
+                    <button class="tab" data-tab="theory">Theory</button>
+                    <button class="tab" data-tab="procedure">Procedure</button>
+                    <button class="tab" data-tab="simulation">Simulation</button>
+                    <button class="tab" data-tab="assignment">Assignment</button>
+                </div>
+                <div id="theory" class="tab-content">Theory Content</div>
+                <div id="procedure" class="tab-content">Procedure Content</div>
+                <div id="simulation" class="tab-content">Simulation Content</div>
+                <div id="assignment" class="tab-content">Assignment Content</div>
+                <div id="progress-bar">
+                    <div id="progress"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="achievement-popup">
+        Achievement Unlocked: Ocean Explorer!
+    </div>
+
+    <!-- Load Three.js and OrbitControls from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
+
+    <!-- Other libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+
+    <!-- Your main script -->
+    <script src="/main.js" type="module"></script>
+</body>
+
+</html>
