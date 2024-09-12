@@ -1,36 +1,49 @@
 export function initPlasticPollutionSimulation(container) {
   container.innerHTML = `
-    <div class="simulation" id="plastic-pollution-sim">
+     <div class="simulation" id="plastic-pollution-sim">
+    <h2>Plastic Pollution Simulation</h2>
+    <div class="controls-canvas-wrapper">
       <div class="controls">
-        <label for="pollution-rate">Pollution Rate: <span id="pollution-rate-value">1</span>x</label>
-        <input type="range" id="pollution-rate" min="0" max="5" step="0.1" value="1">
-        <label for="cleanup-effort">Cleanup Effort: <span id="cleanup-effort-value">0</span>%</label>
-        <input type="range" id="cleanup-effort" min="0" max="100" value="0">
-        <label for="wind-speed">Wind Speed: <span id="wind-speed-value">0</span> km/h</label>
-        <input type="range" id="wind-speed" min="0" max="50" value="0">
-        <label for="current-strength">Current Strength: <span id="current-strength-value">0</span></label>
-        <input type="range" id="current-strength" min="0" max="10" value="0">
-        <button id="add-fish">Add Fish</button>
-        <button id="add-turtle">Add Turtle</button>
-        <button id="add-shark">Add Shark</button>
-        <button id="add-skimmer">Add Skimmer</button>
-        <button id="add-boom">Add Boom</button>
-        <button id="add-drone">Add Drone</button>
+        <div class="control-group">
+          <label for="pollution-rate">Pollution Rate: <span id="pollution-rate-value">1</span>x</label>
+          <input type="range" id="pollution-rate" min="0" max="5" step="0.1" value="1">
+        </div>
+        <div class="control-group">
+          <label for="cleanup-effort">Cleanup Effort: <span id="cleanup-effort-value">0</span>%</label>
+          <input type="range" id="cleanup-effort" min="0" max="100" value="0">
+        </div>
+        <div class="control-group">
+          <label for="wind-speed">Wind Speed: <span id="wind-speed-value">0</span> km/h</label>
+          <input type="range" id="wind-speed" min="0" max="50" value="0">
+        </div>
+        <div class="control-group">
+          <label for="current-strength">Current Strength: <span id="current-strength-value">0</span></label>
+          <input type="range" id="current-strength" min="0" max="10" value="0">
+        </div>
+        <div class="button-group">
+          <button id="add-fish">Add Fish</button>
+          <button id="add-turtle">Add Turtle</button>
+          <button id="add-shark">Add Shark</button>
+          <button id="add-skimmer">Add Skimmer</button>
+          <button id="add-boom">Add Boom</button>
+          <button id="add-drone">Add Drone</button>
+        </div>
       </div>
-      <canvas id="plastic-pollution-canvas"></canvas>
-      <div id="info-panel">
-        <h3>Simulation Statistics</h3>
-        <p>Plastic Particles: <span id="particle-count">0</span></p>
-        <p>Microplastics: <span id="microplastic-count">0</span></p>
-        <p>Animals: <span id="animal-count">0</span></p>
-        <p>Average Animal Health: <span id="avg-animal-health">100</span>%</p>
-      </div>
-      <div id="educational-info">
-        <h3>Plastic Pollution Facts</h3>
-        <p id="fact-display"></p>
-        <button id="next-fact">Next Fact</button>
-      </div>
+      <canvas id="plastic-pollution-canvas" class="simulation-canvas"></canvas>
     </div>
+    <div id="info-panel" class="info-panel">
+      <h3>Simulation Statistics</h3>
+      <p>Plastic Particles: <span id="particle-count">0</span></p>
+      <p>Microplastics: <span id="microplastic-count">0</span></p>
+      <p>Animals: <span id="animal-count">0</span></p>
+      <p>Average Animal Health: <span id="avg-animal-health">100</span>%</p>
+    </div>
+    <div id="educational-info" class="info-panel">
+      <h3>Plastic Pollution Facts</h3>
+      <p id="fact-display"></p>
+      <button id="next-fact">Next Fact</button>
+    </div>
+  </div>
   `;
 
   const canvas = document.getElementById("plastic-pollution-canvas");

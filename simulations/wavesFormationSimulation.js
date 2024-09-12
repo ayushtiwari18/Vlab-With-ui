@@ -1,27 +1,38 @@
 export function initWavesSimulation(container) {
   container.innerHTML = `
-    <div class="simulation" id="waves-sim">
+    <div class="simulation-container">
+  <!-- Waves Simulation -->
+  <div class="simulation" id="waves-sim">
+    <h2>Wave Formation Simulation</h2>
+    <div class="controls-canvas-wrapper">
       <div class="controls">
-        <label for="wind-speed">Wind Speed: <span id="wind-speed-value">10</span> m/s</label>
-        <input type="range" id="wind-speed" min="0" max="30" value="10">
-        <label for="wind-direction">Wind Direction: <span id="wind-direction-value">0</span>°</label>
-        <input type="range" id="wind-direction" min="0" max="359" value="0">
-        <label for="environment">Environment:</label>
-        <select id="environment">
-          <option value="deep-ocean">Deep Ocean</option>
-          <option value="coastline">Coastline</option>
-          <option value="shallow-water">Shallow Water</option>
-        </select>
+        <div class="control-group">
+          <label for="wind-speed">Wind Speed: <span id="wind-speed-value">10</span> m/s</label>
+          <input type="range" id="wind-speed" min="0" max="30" value="10">
+        </div>
+        <div class="control-group">
+          <label for="wind-direction">Wind Direction: <span id="wind-direction-value">0</span>°</label>
+          <input type="range" id="wind-direction" min="0" max="359" value="0">
+        </div>
+        <div class="control-group">
+          <label for="environment">Environment:</label>
+          <select id="environment">
+            <option value="deep-ocean">Deep Ocean</option>
+            <option value="coastline">Coastline</option>
+            <option value="shallow-water">Shallow Water</option>
+          </select>
+        </div>
       </div>
-      <div id="wave-canvas"></div>
-      <div id="wave-info">
-        <h3>Wave Information</h3>
-        <p>Height: <span id="wave-height">0</span> m</p>
-        <p>Length: <span id="wave-length">0</span> m</p>
-        <p>Period: <span id="wave-period">0</span> s</p>
-        <p>Energy: <span id="wave-energy">0</span> J/m²</p>
-      </div>
+      <div id="wave-canvas" class="simulation-canvas"></div>
     </div>
+    <div id="wave-info" class="info-panel">
+      <h3>Wave Information</h3>
+      <p>Height: <span id="wave-height">0</span> m</p>
+      <p>Length: <span id="wave-length">0</span> m</p>
+      <p>Period: <span id="wave-period">0</span> s</p>
+      <p>Energy: <span id="wave-energy">0</span> J/m²</p>
+    </div>
+  </div>
   `;
 
   const windSpeedSlider = document.getElementById("wind-speed");

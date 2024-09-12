@@ -1,26 +1,39 @@
 export function initOilSpillSimulation(container) {
   container.innerHTML = `
     <div class="simulation" id="oilspill-sim">
+    <h2>Oil Spill Simulation</h2>
+    <div class="controls-canvas-wrapper">
       <div class="controls">
-        <button id="start-spill">Start Oil Spill</button>
-        <button id="deploy-skimmer">Deploy Skimmer ($500)</button>
-        <button id="deploy-boom">Deploy Boom ($200)</button>
-        <button id="deploy-dispersant">Use Dispersant ($1000)</button>
-        <label for="wind-direction">Wind Direction: <span id="wind-direction-value">0</span>°</label>
-        <input type="range" id="wind-direction" min="0" max="359" value="0">
-        <label for="wind-speed">Wind Speed: <span id="wind-speed-value">0</span> km/h</label>
-        <input type="range" id="wind-speed" min="0" max="100" value="0">
-        <label for="current-direction">Ocean Current: <span id="current-direction-value">0</span>°</label>
-        <input type="range" id="current-direction" min="0" max="359" value="0">
-        <label for="oil-type">Oil Type:</label>
-        <select id="oil-type">
-          <option value="light">Light Crude</option>
-          <option value="heavy">Heavy Crude</option>
-        </select>
+        <div class="button-group">
+          <button id="start-spill">Start Oil Spill</button>
+          <button id="deploy-skimmer">Deploy Skimmer ($500)</button>
+          <button id="deploy-boom">Deploy Boom ($200)</button>
+          <button id="deploy-dispersant">Use Dispersant ($1000)</button>
+        </div>
+        <div class="control-group">
+          <label for="wind-direction">Wind Direction: <span id="wind-direction-value">0</span>°</label>
+          <input type="range" id="wind-direction" min="0" max="359" value="0">
+        </div>
+        <div class="control-group">
+          <label for="wind-speed">Wind Speed: <span id="wind-speed-value">0</span> km/h</label>
+          <input type="range" id="wind-speed" min="0" max="100" value="0">
+        </div>
+        <div class="control-group">
+          <label for="current-direction">Ocean Current: <span id="current-direction-value">0</span>°</label>
+          <input type="range" id="current-direction" min="0" max="359" value="0">
+        </div>
+        <div class="control-group">
+          <label for="oil-type">Oil Type:</label>
+          <select id="oil-type">
+            <option value="light">Light Crude</option>
+            <option value="heavy">Heavy Crude</option>
+          </select>
+        </div>
       </div>
-      <canvas id="oilspill-canvas"></canvas>
-      <div id="simulation-info"></div>
+      <canvas id="oilspill-canvas" class="simulation-canvas"></canvas>
     </div>
+    <div id="simulation-info" class="info-panel"></div>
+  </div>
   `;
 
   const startSpillBtn = document.getElementById("start-spill");

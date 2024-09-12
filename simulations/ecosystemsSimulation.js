@@ -1,19 +1,31 @@
 export function initEcosystemsSimulation(container) {
   container.innerHTML = `
-    <div class="simulation" id="ecosystem-sim">
+     <div class="simulation" id="ecosystem-sim">
+    <h2>Marine Ecosystem Simulation</h2>
+    <div class="controls-canvas-wrapper">
       <div class="controls">
-        <label for="fishing-rate">Fishing Intensity: <span id="fishing-rate-value">1</span>x</label>
-        <input type="range" id="fishing-rate" min="0" max="5" step="0.1" value="1">
-        <label for="pollution-level">Pollution Level: <span id="pollution-level-value">0</span>%</label>
-        <input type="range" id="pollution-level" min="0" max="100" value="0">
-        <label for="temperature">Water Temperature: <span id="temperature-value">15</span>°C</label>
-        <input type="range" id="temperature" min="0" max="30" value="15">
-        <button id="add-ship">Add Fishing Ship</button>
-        <button id="add-oil-spill">Simulate Oil Spill</button>
+        <div class="control-group">
+          <label for="fishing-rate">Fishing Intensity: <span id="fishing-rate-value">1</span>x</label>
+          <input type="range" id="fishing-rate" min="0" max="5" step="0.1" value="1">
+        </div>
+        <div class="control-group">
+          <label for="pollution-level">Pollution Level: <span id="pollution-level-value">0</span>%</label>
+          <input type="range" id="pollution-level" min="0" max="100" value="0">
+        </div>
+        <div class="control-group">
+          <label for="temperature">Water Temperature: <span id="temperature-value">15</span>°C</label>
+          <input type="range" id="temperature" min="0" max="30" value="15">
+        </div>
+        <div class="button-group">
+          <button id="add-ship">Add Fishing Ship</button>
+          <button id="add-oil-spill">Simulate Oil Spill</button>
+        </div>
       </div>
-      <canvas id="ecosystem-canvas"></canvas>
-      <div id="ecosystem-info"></div>
+      <canvas id="ecosystem-canvas" class="simulation-canvas"></canvas>
     </div>
+    <div id="ecosystem-info" class="info-panel"></div>
+  </div>
+</div>
   `;
 
   const fishingRateSlider = document.getElementById("fishing-rate");

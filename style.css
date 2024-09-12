@@ -1,3 +1,4 @@
+/* Reset and base styles */
 body,
 html {
   margin: 0;
@@ -7,6 +8,7 @@ html {
   overflow: hidden;
 }
 
+/* Ocean background */
 .ocean-background {
   position: fixed;
   top: 0;
@@ -23,6 +25,7 @@ html {
   z-index: -1;
 }
 
+/* Waves animation */
 .waves {
   position: fixed;
   bottom: 0;
@@ -62,6 +65,7 @@ html {
   }
 }
 
+/* Bubbles animation */
 .bubbles {
   position: fixed;
   width: 100%;
@@ -87,7 +91,6 @@ html {
   left: 10%;
   animation-duration: 8s;
 }
-
 .bubble:nth-child(2) {
   width: 20px;
   height: 20px;
@@ -95,7 +98,6 @@ html {
   animation-duration: 5s;
   animation-delay: 1s;
 }
-
 .bubble:nth-child(3) {
   width: 50px;
   height: 50px;
@@ -103,7 +105,6 @@ html {
   animation-duration: 7s;
   animation-delay: 2s;
 }
-
 .bubble:nth-child(4) {
   width: 80px;
   height: 80px;
@@ -111,7 +112,6 @@ html {
   animation-duration: 11s;
   animation-delay: 0s;
 }
-
 .bubble:nth-child(5) {
   width: 35px;
   height: 35px;
@@ -119,7 +119,6 @@ html {
   animation-duration: 6s;
   animation-delay: 1s;
 }
-
 .bubble:nth-child(6) {
   width: 45px;
   height: 45px;
@@ -127,7 +126,6 @@ html {
   animation-duration: 8s;
   animation-delay: 3s;
 }
-
 .bubble:nth-child(7) {
   width: 90px;
   height: 90px;
@@ -135,7 +133,6 @@ html {
   animation-duration: 12s;
   animation-delay: 2s;
 }
-
 .bubble:nth-child(8) {
   width: 25px;
   height: 25px;
@@ -158,6 +155,7 @@ html {
   }
 }
 
+/* Layout */
 .content-wrapper {
   display: flex;
   height: 100vh;
@@ -186,22 +184,7 @@ html {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* ... (keep the rest of your existing CSS) ... */
-
-.content-wrapper {
-  display: flex;
-  height: 100vh;
-}
-
-.sidebar {
-  width: 250px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 20px;
-  overflow-y: auto;
-}
-
+/* Sidebar styles */
 .sidebar h2 {
   color: white;
   margin-bottom: 20px;
@@ -230,20 +213,7 @@ html {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.glass-container {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
+/* Tabs */
 .tabs {
   display: flex;
   justify-content: space-around;
@@ -266,8 +236,6 @@ html {
   transform: translateY(-3px);
 }
 
-/* ... (keep your existing CSS) ... */
-
 .tab-content {
   display: none;
   color: white;
@@ -277,6 +245,7 @@ html {
   display: block;
 }
 
+/* Welcome section */
 #welcome {
   padding: 20px;
 }
@@ -300,8 +269,7 @@ html {
   margin-bottom: 10px;
 }
 
-/* ... (keep the rest of your existing CSS) ... */
-
+/* Progress bar */
 #progress-bar {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
@@ -317,6 +285,7 @@ html {
   transition: width 0.5s ease-in-out;
 }
 
+/* Achievement popup */
 #achievement-popup {
   position: fixed;
   bottom: 20px;
@@ -339,7 +308,8 @@ html {
     opacity: 1;
   }
 }
-/* Simulation Controls Container */
+
+/* Controls */
 .controls {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -351,7 +321,6 @@ html {
   gap: 10px;
 }
 
-/* Labels */
 .controls label {
   color: white;
   font-size: 14px;
@@ -359,7 +328,6 @@ html {
   margin-bottom: 5px;
 }
 
-/* Range Inputs */
 .controls input[type="range"] {
   width: 100%;
   -webkit-appearance: none;
@@ -387,7 +355,6 @@ html {
   border-radius: 50%;
 }
 
-/* Buttons */
 .controls button {
   background-color: #4caf50;
   color: white;
@@ -402,7 +369,6 @@ html {
   background-color: #45a049;
 }
 
-/* Select Dropdowns */
 .controls select {
   width: 100%;
   padding: 8px;
@@ -412,7 +378,7 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Info Panels */
+/* Info panels */
 #info-panel,
 #simulation-info,
 #wave-info,
@@ -432,19 +398,105 @@ html {
   color: #4caf50;
 }
 
-/* Canvas Styling */
+/* Canvas styling */
 canvas,
 #wave-canvas,
 #tsunami-canvas,
-#currents-canvas {
+#currents-canvas,
+#salinity-canvas {
   width: 100%;
   height: 400px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
-/* Responsive Design */
+/* Simulation container */
+.simulation-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+}
+
+/* Simulation styles */
+.simulation {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.simulation h2 {
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.controls-canvas-wrapper {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.control-group label {
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.control-group input[type="range"],
+.control-group select {
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button-group button {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button-group button:hover {
+  background: #45a049;
+}
+
+.simulation-canvas {
+  flex: 2;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  min-height: 300px;
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
   .controls {
     flex-direction: column;
   }
@@ -454,111 +506,12 @@ canvas,
   .controls button {
     width: 100%;
   }
-}
-/* Existing oceanic background styles... */
 
-.simulation {
-  width: 100%;
-  max-width: 800px;
-  height: 600px;
-  position: relative;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  overflow: hidden;
-}
+  .controls-canvas-wrapper {
+    flex-direction: column;
+  }
 
-.controls {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  padding: 1rem;
-  border-radius: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-
-.controls label {
-  color: white;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-input[type="range"] {
-  width: 200px;
-  margin: 0;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
-  -webkit-appearance: none;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  background: #ffffff;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-button {
-  padding: 0.5rem 1rem;
-  margin: 0;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* Additional styles to match the tab design */
-.tab {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s;
-  margin-right: 10px;
-}
-
-.tab:hover,
-.tab.active {
-  background: rgba(255, 255, 255, 0.4);
-  transform: translateY(-3px);
-}
-
-/* Style for the data display */
-.data-display {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  padding: 10px;
-  border-radius: 10px;
-  color: white;
-  font-size: 14px;
-}
-
-.data-display p {
-  margin: 5px 0;
+  .simulation-canvas {
+    min-height: 200px;
+  }
 }

@@ -4,18 +4,27 @@ export function initOceanAcidificationSimulation(container) {
 
   container.innerHTML = `
     <div class="simulation" id="ocean-acidification-sim">
+    <h2>Ocean Acidification Simulation</h2>
+    <div class="controls-canvas-wrapper">
       <div class="controls">
-        <label for="co2-level">CO2 Level: <span id="co2-level-value">400</span> ppm</label>
-        <input type="range" id="co2-level" min="300" max="1000" value="400">
-        <label for="time-scale">Time Scale: <span id="time-scale-value">1</span>x</label>
-        <input type="range" id="time-scale" min="1" max="100" step="1" value="1">
-        <button id="add-shellfish">Add Shellfish</button>
-        <button id="add-coral">Add Coral</button>
-        <button id="add-phytoplankton">Add Phytoplankton</button>
+        <div class="control-group">
+          <label for="co2-level">CO2 Level: <span id="co2-level-value">400</span> ppm</label>
+          <input type="range" id="co2-level" min="300" max="1000" value="400">
+        </div>
+        <div class="control-group">
+          <label for="time-scale">Time Scale: <span id="time-scale-value">1</span>x</label>
+          <input type="range" id="time-scale" min="1" max="100" step="1" value="1">
+        </div>
+        <div class="button-group">
+          <button id="add-shellfish">Add Shellfish</button>
+          <button id="add-coral">Add Coral</button>
+          <button id="add-phytoplankton">Add Phytoplankton</button>
+        </div>
       </div>
-      <canvas id="ocean-acidification-canvas"></canvas>
-      <div id="info-panel"></div>
+      <canvas id="ocean-acidification-canvas" class="simulation-canvas"></canvas>
     </div>
+    <div id="info-panel" class="info-panel"></div>
+  </div>
   `;
 
   const co2LevelSlider = document.getElementById("co2-level");

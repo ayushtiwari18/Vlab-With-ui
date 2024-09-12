@@ -1,33 +1,34 @@
 export function initSalinitySimulation(container) {
   container.innerHTML = `
     <div class="simulation-container">
-      <canvas id="salinity-canvas"></canvas>
-      <div class="controls">
-        <div>
-          <label for="salinity">Salinity: <span id="salinity-value">35</span> ppt</label>
-          <input type="range" id="salinity" min="0" max="50" value="35">
-        </div>
-        <div>
-          <label for="object-density">Object Density: <span id="object-density-value">1000</span> kg/m³</label>
-          <input type="range" id="object-density" min="800" max="1200" value="1000">
-        </div>
-        <div>
-          <label for="temperature">Temperature: <span id="temperature-value">20</span>°C</label>
-          <input type="range" id="temperature" min="0" max="40" value="20">
-        </div>
-        <button id="add-object">Add Object</button>
-        <button id="reset">Reset Simulation</button>
-      </div>
-      <div id="info-panel">
-        <h3>Simulation Info</h3>
-        <p id="water-density"></p>
-        <p id="objects-count"></p>
-        <p id="educational-info"></p>
-      </div>
+  <canvas id="salinity-canvas"></canvas>
+  <div class="controls">
+    <div class="control-group">
+      <label for="salinity">Salinity: <span id="salinity-value">35</span> ppt</label>
+      <input type="range" id="salinity" min="0" max="50" value="35" step="0.1">
     </div>
+    <div class="control-group">
+      <label for="object-density">Object Density: <span id="object-density-value">1000</span> kg/m³</label>
+      <input type="range" id="object-density" min="800" max="1200" value="1000" step="1">
+    </div>
+    <div class="control-group">
+      <label for="temperature">Temperature: <span id="temperature-value">20</span>°C</label>
+      <input type="range" id="temperature" min="0" max="40" value="20" step="0.1">
+    </div>
+  </div>
+  <div class="button-group">
+    <button id="add-object">Add Object</button>
+    <button id="reset">Reset Simulation</button>
+  </div>
+  <div id="info-panel">
+    <h3>Simulation Info</h3>
+    <p id="water-density"></p>
+    <p id="objects-count"></p>
+    <p id="educational-info"></p>
+  </div>
+</div>
   `;
 
-  // Wrap the initialization code in a setTimeout to ensure DOM is updated
   setTimeout(() => {
     const canvas = document.getElementById("salinity-canvas");
     if (!canvas) {
@@ -63,23 +64,29 @@ export function initSalinitySimulation(container) {
       }
 
       update(waterDensity) {
-        const buoyancyForce =
-          (waterDensity - this.density) *
-          9.81 *
-          ((4 / 3) * Math.PI * this.radius ** 3);
-        const dragForce = -0.5 * this.vy * Math.abs(this.vy);
+        const volume = (4 / 3) * Math.PI * this.radius ** 3;
+        const buoyancyForce = (waterDensity - this.density) * 9.81 * volume;
+        const dragCoefficient = 0.47; // Sphere drag coefficient
+        const dragForce =
+          -0.5 *
+          waterDensity *
+          dragCoefficient *
+          Math.PI *
+          this.radius ** 2 *
+          this.vy *
+          Math.abs(this.vy);
         const netForce = buoyancyForce + dragForce;
 
-        this.vy +=
-          netForce / ((4 / 3) * Math.PI * this.radius ** 3 * this.density);
+        const acceleration = netForce / (this.density * volume);
+        this.vy += acceleration;
         this.y += this.vy;
 
         if (this.y < this.radius) {
           this.y = this.radius;
-          this.vy = 0;
+          this.vy *= -0.5; // Bounce with energy loss
         } else if (this.y > canvas.height - this.radius) {
           this.y = canvas.height - this.radius;
-          this.vy = 0;
+          this.vy *= -0.5; // Bounce with energy loss
         }
       }
 
@@ -111,17 +118,36 @@ export function initSalinitySimulation(container) {
 
     function updateSliders() {
       document.getElementById("salinity").value = salinity;
-      document.getElementById("salinity-value").textContent = salinity;
+      document.getElementById("salinity-value").textContent =
+        salinity.toFixed(1);
       document.getElementById("object-density").value = objectDensity;
       document.getElementById("object-density-value").textContent =
         objectDensity;
       document.getElementById("temperature").value = temperature;
-      document.getElementById("temperature-value").textContent = temperature;
+      document.getElementById("temperature-value").textContent =
+        temperature.toFixed(1);
     }
 
     function calculateWaterDensity(salinity, temperature) {
-      // Simplified equation for water density based on salinity and temperature
-      return 1000 + 0.8 * salinity - 0.2 * temperature;
+      // More accurate equation for seawater density (UNESCO 1983 equation)
+      const A =
+        999.842594 +
+        6.793952e-2 * temperature -
+        9.09529e-3 * temperature ** 2 +
+        1.001685e-4 * temperature ** 3 -
+        1.120083e-6 * temperature ** 4 +
+        6.536332e-9 * temperature ** 5;
+      const B =
+        8.24493e-1 -
+        4.0899e-3 * temperature +
+        7.6438e-5 * temperature ** 2 -
+        8.2467e-7 * temperature ** 3 +
+        5.3875e-9 * temperature ** 4;
+      const C =
+        -5.72466e-3 + 1.0227e-4 * temperature - 1.6546e-6 * temperature ** 2;
+      const D = 4.8314e-4;
+
+      return A + B * salinity + C * salinity ** 1.5 + D * salinity ** 2;
     }
 
     function getWaterColor(salinity, temperature) {
@@ -153,23 +179,20 @@ export function initSalinitySimulation(container) {
     }
 
     function updateSimulation() {
-      if (!ctx) return; // Add this check
+      if (!ctx) return;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw water
       const waterDensity = calculateWaterDensity(salinity, temperature);
       const waterColor = getWaterColor(salinity, temperature);
       ctx.fillStyle = waterColor;
       drawWaves(ctx, time);
 
-      // Update and draw objects
       objects.forEach((object) => {
         object.update(waterDensity);
         object.draw();
       });
 
-      // Draw water surface line
       ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
       ctx.setLineDash([5, 5]);
       ctx.beginPath();
@@ -177,7 +200,6 @@ export function initSalinitySimulation(container) {
       ctx.lineTo(canvas.width, canvas.height / 2);
       ctx.stroke();
 
-      // Update info panel
       const waterDensityElem = document.getElementById("water-density");
       const objectsCountElem = document.getElementById("objects-count");
       if (waterDensityElem) {
@@ -188,30 +210,52 @@ export function initSalinitySimulation(container) {
       if (objectsCountElem) {
         objectsCountElem.textContent = `Objects: ${objects.length}`;
       }
-      updateEducationalInfo();
+      updateEducationalInfo(waterDensity);
 
       time += 0.1;
       requestAnimationFrame(updateSimulation);
     }
 
-    function updateEducationalInfo() {
+    function updateEducationalInfo(waterDensity) {
       const infoPanel = document.getElementById("educational-info");
       if (!infoPanel) return;
 
-      if (salinity < 5) {
+      let info = "";
+
+      if (salinity < 0.5) {
         info =
-          "Low salinity: This represents freshwater environments like rivers and lakes.";
+          "Fresh water: Typical of rivers and lakes. Density is lower than seawater.";
+      } else if (salinity < 5) {
+        info =
+          "Slightly saline: Found in some estuaries and brackish seas. Density is increasing.";
       } else if (salinity < 30) {
         info =
-          "Moderate salinity: This is typical of brackish water in estuaries.";
+          "Brackish water: Common in estuaries and some seas. Density is notably higher than fresh water.";
+      } else if (salinity < 40) {
+        info =
+          "Typical seawater: Most oceans have salinity in this range. Density is significantly higher than fresh water.";
       } else {
-        info = "High salinity: This represents typical ocean conditions.";
+        info =
+          "Highly saline water: Found in some seas like the Dead Sea. Very high density.";
       }
 
-      if (temperature < 10) {
-        info += " The low temperature increases water density.";
+      if (temperature < 4) {
+        info += " Near freezing point, water density behaves uniquely.";
+      } else if (temperature < 10) {
+        info += " Cold water is denser than warm water at the same salinity.";
       } else if (temperature > 30) {
-        info += " The high temperature decreases water density.";
+        info +=
+          " Warm water decreases density, potentially leading to stratification.";
+      }
+
+      info += ` Current water density: ${waterDensity.toFixed(2)} kg/m³.`;
+
+      if (objects.length > 0) {
+        const floatingCount = objects.filter(
+          (obj) => obj.density < waterDensity
+        ).length;
+        const sinkingCount = objects.length - floatingCount;
+        info += ` ${floatingCount} object(s) floating, ${sinkingCount} sinking.`;
       }
 
       infoPanel.textContent = info;
@@ -219,26 +263,17 @@ export function initSalinitySimulation(container) {
 
     container.addEventListener("input", (e) => {
       if (e.target.id === "salinity") {
-        salinity = parseInt(e.target.value);
-        const salinityValueElem = document.getElementById("salinity-value");
-        if (salinityValueElem) {
-          salinityValueElem.textContent = salinity;
-        }
+        salinity = parseFloat(e.target.value);
+        document.getElementById("salinity-value").textContent =
+          salinity.toFixed(1);
       } else if (e.target.id === "object-density") {
         objectDensity = parseInt(e.target.value);
-        const objectDensityValueElem = document.getElementById(
-          "object-density-value"
-        );
-        if (objectDensityValueElem) {
-          objectDensityValueElem.textContent = objectDensity;
-        }
+        document.getElementById("object-density-value").textContent =
+          objectDensity;
       } else if (e.target.id === "temperature") {
-        temperature = parseInt(e.target.value);
-        const temperatureValueElem =
-          document.getElementById("temperature-value");
-        if (temperatureValueElem) {
-          temperatureValueElem.textContent = temperature;
-        }
+        temperature = parseFloat(e.target.value);
+        document.getElementById("temperature-value").textContent =
+          temperature.toFixed(1);
       }
     });
 

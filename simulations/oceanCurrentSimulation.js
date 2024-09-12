@@ -1,26 +1,37 @@
 export function initOceanCurrentsSimulation(container) {
   container.innerHTML = `
     <div class="simulation" id="currents-sim">
+    <h2>Ocean Currents Simulation</h2>
+    <div class="controls-canvas-wrapper">
       <div class="controls">
-        <label for="temperature">Global Temperature: <span id="temperature-value">15</span>°C</label>
-        <input type="range" id="temperature" min="0" max="30" value="15">
-        <label for="salinity">Global Salinity: <span id="salinity-value">35</span> ppt</label>
-        <input type="range" id="salinity" min="30" max="40" value="35">
-        <label for="wind-strength">Wind Strength: <span id="wind-strength-value">5</span> m/s</label>
-        <input type="range" id="wind-strength" min="0" max="20" value="5">
-        <button id="add-debris">Add Debris</button>
-        <button id="add-marine-life">Add Marine Life</button>
-        <button id="toggle-time-lapse">Toggle Time-Lapse</button>
+        <div class="control-group">
+          <label for="temperature">Global Temperature: <span id="temperature-value">15</span>°C</label>
+          <input type="range" id="temperature" min="0" max="30" value="15">
+        </div>
+        <div class="control-group">
+          <label for="salinity">Global Salinity: <span id="salinity-value">35</span> ppt</label>
+          <input type="range" id="salinity" min="30" max="40" value="35">
+        </div>
+        <div class="control-group">
+          <label for="wind-strength">Wind Strength: <span id="wind-strength-value">5</span> m/s</label>
+          <input type="range" id="wind-strength" min="0" max="20" value="5">
+        </div>
+        <div class="button-group">
+          <button id="add-debris">Add Debris</button>
+          <button id="add-marine-life">Add Marine Life</button>
+          <button id="toggle-time-lapse">Toggle Time-Lapse</button>
+        </div>
       </div>
-      <div id="currents-canvas"></div>
-      <div id="info-panel">
-        <h3>Ocean Current Information</h3>
-        <p id="current-info">Hover over a current for information</p>
-      </div>
-      <div id="time-lapse-info">
-        <h3>Time-Lapse: <span id="year">2023</span></h3>
-      </div>
+      <div id="currents-canvas" class="simulation-canvas"></div>
     </div>
+    <div id="info-panel" class="info-panel">
+      <h3>Ocean Current Information</h3>
+      <p id="current-info">Hover over a current for information</p>
+    </div>
+    <div id="time-lapse-info" class="info-panel">
+      <h3>Time-Lapse: <span id="year">2023</span></h3>
+    </div>
+  </div>
   `;
 
   const temperatureSlider = document.getElementById("temperature");
