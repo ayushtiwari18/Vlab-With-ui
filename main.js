@@ -78,8 +78,6 @@ function loadExperiment(id) {
     console.warn(`initSimulation is not a function for experiment "${id}"`);
     simulationContainer.innerHTML = `<p>Simulation not available for this experiment.</p>`;
   }
-
-  resetProgress();
 }
 
 // Tab functionality
@@ -88,12 +86,19 @@ tabs.forEach((tab) => {
 });
 
 function openTab(event, tabName) {
-  tabContents.forEach((content) => content.classList.remove("active"));
-  tabs.forEach((tab) => tab.classList.remove("active"));
+  // Hide all tab contents
+  const tabContents = document.getElementsByClassName("tab-content");
+  for (let i = 0; i < tabContents.length; i++) {
+    tabContents[i].classList.remove("active"); // Hide other tab contents
+  }
 
+  // Show the clicked tab's content
   document.getElementById(tabName).classList.add("active");
+
+  // Add the 'active' class to the clicked tab
   event.currentTarget.classList.add("active");
 
+  // Update the progress only if this is the first time the tab is clicked
   updateProgress();
 }
 
@@ -101,10 +106,13 @@ function openTab(event, tabName) {
 function updateProgress() {
   const completedTabs = document.querySelectorAll(".tab.active").length;
   const totalTabs = tabs.length;
-  const progressPercentage = (completedTabs / totalTabs) * 100;
+  const progressPercentage = (completedTabs / totalTabs) * 100; // Calculate progress percentage
 
-  progressBar.style.width = `${progressPercentage}%`;
+  // Update the progress bar width
+  document.getElementById("progress").style.width = progressPercentage + "%";
+  console.log(`Progress updated: ${progressPercentage}%`);
 
+  // Show achievement if progress reaches 100%
   if (progressPercentage === 100) {
     showAchievement();
   }
