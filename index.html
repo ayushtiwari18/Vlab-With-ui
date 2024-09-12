@@ -24,15 +24,92 @@
             <div class="glass-container">
                 <h1 id="experiment-title">Welcome to Oceanic Virtual Lab</h1>
                 <div class="tabs">
+                    <button class="tab active" data-tab="welcome">Welcome</button>
                     <button class="tab" data-tab="theory">Theory</button>
                     <button class="tab" data-tab="procedure">Procedure</button>
                     <button class="tab" data-tab="simulation">Simulation</button>
                     <button class="tab" data-tab="assignment">Assignment</button>
                 </div>
-                <div id="theory" class="tab-content">Theory Content</div>
-                <div id="procedure" class="tab-content">Procedure Content</div>
-                <div id="simulation" class="tab-content">Simulation Content</div>
-                <div id="assignment" class="tab-content">Assignment Content</div>
+                <div id="welcome" class="tab-content active">
+                    <!-- <h2>Welcome to the Oceanic Virtual Lab!</h2> -->
+                    <p>We're thrilled to have you embark on this exciting journey into the heart of the ocean. Here,
+                        you'll dive deep
+                        into fascinating marine science topics, explore the forces that shape our seas, and understand
+                        the intricate
+                        ecosystems hidden beneath the waves. From the surface to the ocean floor, this virtual lab
+                        offers a unique,
+                        interactive experience to quench your curiosity.</p>
+                    <p><strong>How does it work?</strong> It’s simple! Just pick an experiment from the sidebar, and
+                        you'll be guided
+                        through each step. Each tab you see plays a key role in your learning experience. Let's walk
+                        through them:</p>
+                    <ul>
+                        <li><strong>Theory:</strong> Want to dive into the “why” behind the experiment? The Theory tab
+                            is your gateway
+                            to understanding the science that underpins what you're about to explore.</li>
+                        <li><strong>Procedure:</strong> Science thrives on precision. The Procedure tab will walk you
+                            through the exact
+                            steps to carry out your experiment, just like in a real-life lab.</li>
+                        <li><strong>Simulation:</strong> This is where the magic happens. The Simulation tab allows you
+                            to interact with
+                            the experiment, observe results, and tweak parameters for different outcomes.</li>
+                        <li><strong>Assignment:</strong> Ready to test your knowledge? The Assignment tab challenges you
+                            to reflect on
+                            what you've learned, providing tasks or questions to deepen your understanding.</li>
+                    </ul>
+                    <p><em>Still curious?</em> Explore each tab thoroughly, and remember that science is about asking
+                        questions. The
+                        ocean has many secrets waiting to be unlocked, and this lab is your key. Let’s start
+                        discovering!</p>
+                    <p>Click on an experiment in the sidebar to begin your adventure. Happy exploring!</p>
+                </div>
+
+                <div id="theory" class="tab-content">
+                    <h2>The Science Behind the Ocean</h2>
+                    <p>The Theory tab is where your understanding begins. Every experiment is grounded in fascinating
+                        scientific
+                        principles. Here, you’ll uncover the 'why' and 'how' behind oceanic phenomena. Whether you’re
+                        studying ocean
+                        acidification or the dynamics of waves, the Theory section will break down the concepts in an
+                        easy-to-understand
+                        way, empowering you to think like a marine scientist. Dive in and discover the forces that shape
+                        the world’s
+                        oceans!</p>
+                </div>
+
+                <div id="procedure" class="tab-content">
+                    <h2>Step-by-Step Guide</h2>
+                    <p>The Procedure tab is your map for navigating the experiment. We’ve designed it to mimic
+                        real-world lab
+                        environments, so you can experience hands-on marine science. Each step is carefully laid out,
+                        guiding you
+                        through what to observe and how to control the conditions. Pay close attention, and don’t be
+                        afraid to
+                        experiment—you’re in control of this scientific voyage.</p>
+                </div>
+
+                <div id="simulation" class="tab-content">
+                    <h2>Get Ready to Experiment!</h2>
+                    <p>This is where the ocean comes alive in front of your eyes! The Simulation tab offers a digital
+                        recreation of your
+                        chosen experiment. From watching waves interact with structures to seeing the effects of
+                        corrosion on marine
+                        materials, this is your chance to play with real science. Adjust the variables, run the
+                        simulation, and watch
+                        the results unfold. What discoveries will you make?</p>
+                </div>
+
+                <div id="assignment" class="tab-content">
+                    <h2>Your Turn to Shine!</h2>
+                    <p>The Assignment tab challenges you to apply what you've learned. Here, you’ll find tasks, quizzes,
+                        or reflection
+                        prompts that encourage deeper thought and analysis. It's your opportunity to show off your
+                        marine science
+                        knowledge and take the next step in mastering the ocean’s mysteries. Complete the assignments to
+                        earn your badge
+                        of honor as a virtual marine scientist!</p>
+                </div>
+
                 <div id="progress-bar">
                     <div id="progress"></div>
                 </div>
@@ -43,11 +120,9 @@
         Achievement Unlocked: Ocean Explorer!
     </div>
 
-    <!-- Load Three.js and OrbitControls from CDN -->
+    <!-- Load libraries from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
-
-    <!-- Other libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>

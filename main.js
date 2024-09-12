@@ -50,12 +50,18 @@ function loadExperiment(id) {
     console.error(`Experiment with id "${id}" not found`);
     return;
   }
-
+  resetProgress();
   experimentTitle.textContent = experiment.title;
   document.getElementById("theory").innerHTML = experiment.theory;
   document.getElementById("procedure").innerHTML = experiment.procedure;
   document.getElementById("simulation").innerHTML = experiment.simulation;
   document.getElementById("assignment").innerHTML = experiment.assignment;
+
+  // Hide welcome tab and show other tabs
+  document.querySelector('.tab[data-tab="welcome"]').style.display = "none";
+  document.getElementById("welcome").classList.remove("active");
+  document.querySelector('.tab[data-tab="theory"]').classList.add("active");
+  document.getElementById("theory").classList.add("active");
 
   // Initialize the simulation
   // Create a container for the simulation
@@ -87,7 +93,7 @@ tabs.forEach((tab) => {
 
 function openTab(event, tabName) {
   // Hide all tab contents
-  const tabContents = document.getElementsByClassName("tab-content");
+  tabContents.forEach((content) => content.classList.remove("active"));
   for (let i = 0; i < tabContents.length; i++) {
     tabContents[i].classList.remove("active"); // Hide other tab contents
   }
@@ -105,14 +111,14 @@ function openTab(event, tabName) {
 // Progress tracking
 function updateProgress() {
   const completedTabs = document.querySelectorAll(".tab.active").length;
-  const totalTabs = tabs.length;
-  const progressPercentage = (completedTabs / totalTabs) * 100; // Calculate progress percentage
+  const totalTabs = tabs.length - 1; // Exclude welcome tab
+
+  const progressPercentage = Math.min((completedTabs / totalTabs) * 100, 100); // Ensure it doesn't exceed 100% // Calculate progress percentage
 
   // Update the progress bar width
-  document.getElementById("progress").style.width = progressPercentage + "%";
+  progressBar.style.width = progressPercentage + "%";
   console.log(`Progress updated: ${progressPercentage}%`);
 
-  // Show achievement if progress reaches 100%
   if (progressPercentage === 100) {
     showAchievement();
   }
@@ -135,8 +141,9 @@ function showAchievement() {
 document.addEventListener("DOMContentLoaded", () => {
   populateExperimentList();
   // Load the first experiment by default
-  const firstExperimentId = Object.keys(experimentContent)[0];
-  if (firstExperimentId) {
-    loadExperiment(firstExperimentId);
-  }
+  // Show welcome tab by default
+  openTab(
+    { currentTarget: document.querySelector('.tab[data-tab="welcome"]') },
+    "welcome"
+  );
 });

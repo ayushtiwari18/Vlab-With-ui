@@ -133,6 +133,8 @@ html {
   transform: translateY(-3px);
 }
 
+/* ... (keep your existing CSS) ... */
+
 .tab-content {
   display: none;
   color: white;
@@ -141,6 +143,31 @@ html {
 .tab-content.active {
   display: block;
 }
+
+#welcome {
+  padding: 20px;
+}
+
+#welcome h2 {
+  color: #4caf50;
+  margin-bottom: 15px;
+}
+
+#welcome p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+#welcome ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+#welcome li {
+  margin-bottom: 10px;
+}
+
+/* ... (keep the rest of your existing CSS) ... */
 
 #progress-bar {
   width: 100%;
