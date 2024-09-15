@@ -4,20 +4,23 @@ import { waves } from "./experiments/wavesFormation.js";
 import { ecosystems } from "./experiments/ecosystems.js";
 import { oceanCurrents } from "./experiments/oceanCurrent.js";
 import { plasticPollution } from "./experiments/plasticPollution.js";
-import { tsunami } from "./experiments/tsunami.js";
+// import { tsunami } from "./experiments/tsunami.js";
 import { salinity } from "./experiments/salinity.js";
+import { oilSpill } from "./experiments/oilSpill.js";
 
 const experimentContent = {
   oceanAcidification,
-  waves,
   ecosystems,
   oceanCurrents,
   plasticPollution,
-  tsunami,
-  salinity,
 
+  oilSpill,
+  waves,
+  salinity,
   // ... other experiments ...
 };
+
+let currentExperimentId = null;
 
 // DOM elements
 const experimentList = document.getElementById("experiment-list");
@@ -43,8 +46,32 @@ function populateExperimentList() {
   });
 }
 
+function initializeQuiz(id) {
+  const quizContainer = document.getElementById("quiz");
+  if (!quizContainer) {
+    console.error(`Quiz container not found for experiment "${id}"`);
+    return;
+  }
+
+  quizContainer.innerHTML = ""; // Clear previous quiz content
+
+  const experiment = experimentContent[id];
+
+  if (typeof experiment.initQuiz === "function") {
+    try {
+      experiment.initQuiz();
+    } catch (error) {
+      console.error(`Error initializing quiz for experiment "${id}":`, error);
+      quizContainer.innerHTML = `<p>An error occurred while loading the quiz. Please try refreshing the page.</p>`;
+    }
+  } else {
+    console.warn(`initQuiz is not a function for experiment "${id}"`);
+    quizContainer.innerHTML = `<p>Quiz not available for this experiment.</p>`;
+  }
+}
 // Load experiment
 function loadExperiment(id) {
+  currentExperimentId = id;
   const experiment = experimentContent[id];
   if (!experiment) {
     console.error(`Experiment with id "${id}" not found`);
@@ -56,6 +83,9 @@ function loadExperiment(id) {
   document.getElementById("procedure").innerHTML = experiment.procedure;
   document.getElementById("simulation").innerHTML = experiment.simulation;
   document.getElementById("assignment").innerHTML = experiment.assignment;
+  initializeQuiz(id); // Call the quiz initialization function
+  document.getElementById("references").innerHTML = experiment.references;
+  document.getElementById("feedback").innerHTML = experiment.feedback;
 
   // Hide welcome tab and show other tabs
   document.querySelector('.tab[data-tab="welcome"]').style.display = "none";
@@ -104,6 +134,14 @@ function openTab(event, tabName) {
   // Add the 'active' class to the clicked tab
   event.currentTarget.classList.add("active");
 
+  // Initialize quiz only when the quiz tab is clicked
+  if (tabName === "quiz") {
+    const currentExperimentId = getCurrentExperimentId(); // You'll need to implement this function
+    if (currentExperimentId) {
+      initializeQuiz(currentExperimentId);
+    }
+  }
+
   // Update the progress only if this is the first time the tab is clicked
   updateProgress();
 }
@@ -136,6 +174,10 @@ function showAchievement() {
   setTimeout(() => {
     achievementPopup.style.display = "none";
   }, 3000);
+}
+
+function getCurrentExperimentId() {
+  return currentExperimentId;
 }
 
 document.addEventListener("DOMContentLoaded", () => {

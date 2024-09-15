@@ -1,86 +1,31 @@
 export function initOceanAcidificationSimulation(container) {
+  // The entire simulation code you provided goes here
+  // Replace `simulations.oceanAcidification = (container) => {` with
+
   container.innerHTML = `
     <div class="simulation" id="ocean-acidification-sim">
-      <h2>Ocean Acidification Simulation</h2>
-      <div class="controls-canvas-wrapper">
-        <div class="controls">
-          <div class="control-group">
-            <label for="co2-level">CO2 Level: <span id="co2-level-value">400</span> ppm</label>
-            <input type="range" id="co2-level" min="300" max="1000" value="400">
-          </div>
-          <div class="control-group">
-            <label for="time-scale">Time Scale: <span id="time-scale-value">1</span>x</label>
-            <input type="range" id="time-scale" min="1" max="100" step="1" value="1">
-          </div>
-          <div class="button-group">
-            <button id="add-shellfish">Add Shellfish</button>
-            <button id="add-coral">Add Coral</button>
-            <button id="add-phytoplankton">Add Phytoplankton</button>
-          </div>
+    <h2>Ocean Acidification Simulation</h2>
+    <div class="controls-canvas-wrapper">
+      <div class="controls">
+        <div class="control-group">
+          <label for="co2-level">CO2 Level: <span id="co2-level-value">400</span> ppm</label>
+          <input type="range" id="co2-level" min="300" max="1000" value="400">
         </div>
-        <canvas id="ocean-acidification-canvas" class="simulation-canvas"></canvas>
+        <div class="control-group">
+          <label for="time-scale">Time Scale: <span id="time-scale-value">1</span>x</label>
+          <input type="range" id="time-scale" min="1" max="100" step="1" value="1">
+        </div>
+        <div class="button-group">
+          <button id="add-shellfish">Add Shellfish</button>
+          <button id="add-coral">Add Coral</button>
+          <button id="add-phytoplankton">Add Phytoplankton</button>
+        </div>
       </div>
-      <div id="info-panel" class="info-panel"></div>
+      <canvas id="ocean-acidification-canvas" class="simulation-canvas"></canvas>
     </div>
+    <div id="info-panel" class="info-panel"></div>
+  </div>
   `;
-
-  // Add styles
-  const style = document.createElement('style');
-  style.textContent = `
-    .simulation {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .controls-canvas-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .controls {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-    .control-group {
-      margin-bottom: 15px;
-    }
-    .control-group label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    .control-group input[type="range"] {
-      width: 100%;
-    }
-    .button-group {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    .button-group button {
-      flex: 1;
-      margin: 0 5px;
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .button-group button:hover {
-      background-color: #45a049;
-    }
-    .simulation-canvas {
-      border: 1px solid #ddd;
-    }
-    .info-panel {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #f0f0f0;
-      border-radius: 5px;
-    }
-  `;
-  document.head.appendChild(style);
 
   const co2LevelSlider = document.getElementById("co2-level");
   const co2LevelValue = document.getElementById("co2-level-value");
@@ -103,24 +48,12 @@ export function initOceanAcidificationSimulation(container) {
   let currentYear = 2024;
   let temperature = 15; // Starting temperature in Celsius
 
-  let shellfishImage = new Image();
-  let coralImage = new Image();
-  shellfishImage.src = "/models/fish.png";
-  coralImage.src = "/models/corals.png";
-
   class Organism {
     constructor(x, y, type) {
       this.x = x;
       this.y = y;
       this.type = type;
-      // Increase size for shellfish and coral specifically
-      if (type === "shellfish") {
-        this.size = 40; // Increased size for shellfish
-      } else if (type === "coral") {
-        this.size = 45; // Increased size for coral
-      } else {
-        this.size = 5; // Keep phytoplankton small
-      }
+      this.size = type === "phytoplankton" ? 5 : 20;
       this.health = 100;
       this.age = 0;
     }
@@ -158,9 +91,18 @@ export function initOceanAcidificationSimulation(container) {
       const alpha = this.health / 100;
       ctx.globalAlpha = alpha;
       if (this.type === "shellfish") {
-        ctx.drawImage(shellfishImage, this.x - this.size/2, this.y - this.size/2, this.size, this.size);
+        ctx.fillStyle = "brown";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
       } else if (this.type === "coral") {
-        ctx.drawImage(coralImage, this.x - this.size/2, this.y - this.size/2, this.size, this.size);
+        ctx.fillStyle = "pink";
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y - this.size);
+        ctx.lineTo(this.x + this.size, this.y + this.size);
+        ctx.lineTo(this.x - this.size, this.y + this.size);
+        ctx.closePath();
+        ctx.fill();
       } else if (this.type === "phytoplankton") {
         ctx.fillStyle = "green";
         ctx.beginPath();
@@ -170,7 +112,9 @@ export function initOceanAcidificationSimulation(container) {
       ctx.globalAlpha = 1;
 
       // Draw health bar
-      ctx.fillStyle = `rgb(${255 - this.health * 2.55}, ${this.health * 2.55}, 0)`;
+      ctx.fillStyle = `rgb(${255 - this.health * 2.55}, ${
+        this.health * 2.55
+      }, 0)`;
       ctx.fillRect(
         this.x - this.size,
         this.y - this.size - 10,
@@ -214,38 +158,46 @@ export function initOceanAcidificationSimulation(container) {
   }
 
   function calculatePH(co2) {
+    // More realistic pH calculation based on CO2 levels
     return 8.1 - Math.log(co2 / 400) * 0.3;
   }
 
   function updateTemperature() {
+    // Simplified temperature increase based on CO2 levels
     temperature = 15 + (co2Level - 400) * 0.01;
   }
 
   function updateSimulation() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Update temperature
     updateTemperature();
 
+    // Draw water
     const pH = calculatePH(co2Level);
     const blueValue = Math.max(0, Math.min(255, 190 - (co2Level - 400) * 0.2));
     ctx.fillStyle = `rgb(0, ${119 - (temperature - 15) * 5}, ${blueValue})`;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    // Update and draw organisms
     organisms = organisms.filter((org) => org.health > 0);
     organisms.forEach((org) => {
       org.update(pH, temperature);
       org.draw();
     });
 
+    // Update and draw bubbles
     bubbles.forEach((bubble) => {
       bubble.update();
       bubble.draw();
     });
 
+    // Add new bubbles
     if (Math.random() < 0.1 * timeScale * (co2Level / 400)) {
       bubbles.push(new Bubble(Math.random() * canvas.width, canvas.height));
     }
 
+    // Display stats
     ctx.fillStyle = "white";
     ctx.font = "16px Arial";
     ctx.fillText(`pH: ${pH.toFixed(2)}`, 10, 20);
@@ -253,8 +205,10 @@ export function initOceanAcidificationSimulation(container) {
     ctx.fillText(`Year: ${Math.floor(currentYear)}`, 10, 60);
     ctx.fillText(`Organisms: ${organisms.length}`, 10, 80);
 
+    // Update current year
     currentYear += 0.1 * timeScale;
 
+    // Update info panel
     updateInfoPanel(pH, temperature);
 
     requestAnimationFrame(updateSimulation);
@@ -299,14 +253,18 @@ export function initOceanAcidificationSimulation(container) {
 
   addShellfishBtn.addEventListener("click", () => addOrganism("shellfish"));
   addCoralBtn.addEventListener("click", () => addOrganism("coral"));
-  addPhytoplanktonBtn.addEventListener("click", () => addOrganism("phytoplankton"));
+  addPhytoplanktonBtn.addEventListener("click", () =>
+    addOrganism("phytoplankton")
+  );
 
+  // Initialize simulation
   for (let i = 0; i < 20; i++) {
     bubbles.push(
       new Bubble(Math.random() * canvas.width, Math.random() * canvas.height)
     );
   }
 
+  // Add initial organisms
   for (let i = 0; i < 5; i++) {
     addOrganism("shellfish");
     addOrganism("coral");

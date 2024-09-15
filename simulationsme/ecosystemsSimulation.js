@@ -43,16 +43,6 @@ export function initEcosystemsSimulation(container) {
   canvas.width = 800;
   canvas.height = 600;
 
-  // Load images
-  const preyFishImage = new Image();
-  preyFishImage.src = "/models/fish.png";  // Update this path
-  const predatorFishImage = new Image();
-  predatorFishImage.src = "/models/shark1.png";  // Update this path
-  const shipImage = new Image();
-  shipImage.src = "/models/fishingship.png";  // Update this path
-  const planktonImage = new Image();
-  planktonImage.src = "/models/plankton.png";  // Update this path
-
   class MarineOrganism {
     constructor(x, y, size, speed) {
       this.x = x || Math.random() * canvas.width;
@@ -76,24 +66,28 @@ export function initEcosystemsSimulation(container) {
 
   class Fish extends MarineOrganism {
     constructor(type) {
-      super(null, null, Math.random() * 20 + 15, Math.random() * 2 + 1);
+      super(null, null, Math.random() * 10 + 5, Math.random() * 2 + 1);
       this.type = type || (Math.random() < 0.2 ? "predator" : "prey");
       this.energy = 100;
     }
 
     draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.angle);
-      const image = this.type === "predator" ? predatorFishImage : preyFishImage;
-      ctx.drawImage(image, -this.size, -this.size / 2, this.size * 2, this.size);
-      ctx.restore();
+      ctx.fillStyle =
+        this.type === "predator"
+          ? "rgba(255, 0, 0, 0.8)"
+          : "rgba(255, 165, 0, 0.8)";
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(this.x - this.size, this.y - this.size / 2);
+      ctx.lineTo(this.x - this.size, this.y + this.size / 2);
+      ctx.closePath();
+      ctx.fill();
     }
   }
 
   class Plankton extends MarineOrganism {
     constructor() {
-      super(null, null, Math.random() * 5 + 3, 0.1);
+      super(null, null, Math.random() * 3 + 1, 0.1);
     }
 
     move() {
@@ -104,11 +98,10 @@ export function initEcosystemsSimulation(container) {
     }
 
     draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.angle);
-      ctx.drawImage(planktonImage, -this.size / 2, -this.size / 2, this.size, this.size);
-      ctx.restore();
+      ctx.fillStyle = "rgba(0, 255, 0, 0.5)";
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
     }
   }
 
@@ -116,8 +109,8 @@ export function initEcosystemsSimulation(container) {
     constructor() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = 200;
-      this.speed = 0.8;
+      this.size = 30;
+      this.speed = 0.5;
       this.angle = Math.random() * Math.PI * 2;
       this.fishCaught = 0;
     }
@@ -134,15 +127,17 @@ export function initEcosystemsSimulation(container) {
     }
 
     draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.angle);
-      ctx.drawImage(shipImage, -this.size / 2, -this.size / 4, this.size, this.size / 2);
-      ctx.restore();
+      ctx.fillStyle = "rgba(100, 100, 100, 0.8)";
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(this.x - this.size, this.y - this.size / 2);
+      ctx.lineTo(this.x - this.size, this.y + this.size / 2);
+      ctx.closePath();
+      ctx.fill();
     }
 
     fish(fishes) {
-      const catchRadius = 70;
+      const catchRadius = 50;
       fishes = fishes.filter((fish) => {
         const dx = this.x - fish.x;
         const dy = this.y - fish.y;
@@ -162,7 +157,7 @@ export function initEcosystemsSimulation(container) {
       this.x = x;
       this.y = y;
       this.radius = 0;
-      this.maxRadius = 150;
+      this.maxRadius = 100;
       this.growthRate = 0.5;
     }
 

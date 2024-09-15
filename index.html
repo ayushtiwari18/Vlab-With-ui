@@ -39,6 +39,9 @@
                     <button class="tab" data-tab="procedure">Procedure</button>
                     <button class="tab" data-tab="simulation">Simulation</button>
                     <button class="tab" data-tab="assignment">Assignment</button>
+                    <button class="tab" data-tab="quiz">Quiz</button>
+                    <button class="tab" data-tab="references">References</button>
+                    <button class="tab" data-tab="feedback">Feedback</button>
                 </div>
                 <div id="welcome" class="tab-content active">
                     <!-- <h2>Welcome to the Oceanic Virtual Lab!</h2> -->
@@ -118,6 +121,24 @@
                         knowledge and take the next step in mastering the ocean’s mysteries. Complete the assignments to
                         earn your badge
                         of honor as a virtual marine scientist!</p>
+                </div>
+                <div id="quiz" class="tab-content">
+                    <h2>Test Your Knowledge</h2>
+                    <p>Challenge yourself with these questions about the experiment!</p>
+                    <!-- Quiz content will be dynamically populated -->
+                </div>
+                <div id="references" class="tab-content">
+                    <h2>Learn More</h2>
+                    <p>Explore these additional resources to deepen your understanding:</p>
+                    <!-- References and videos will be dynamically populated -->
+                </div>
+                <div id="feedback" class="tab-content">
+                    <h2>Share Your Thoughts</h2>
+                    <p>We value your feedback! Please let us know about your experience:</p>
+                    <form id="feedback-form">
+                        <textarea id="feedback-text" rows="4" placeholder="Enter your feedback here..."></textarea>
+                        <button type="submit">Submit Feedback</button>
+                    </form>
                 </div>
 
                 <div id="progress-bar">

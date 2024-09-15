@@ -1,5 +1,5 @@
-// experiments/plasticPollution.js
 import { initPlasticPollutionSimulation } from "../simulations/plasticPollutionSimulation.js";
+import { initPlasticPollutionQuiz } from "../quizzes/plasticPolluionQuiz.js";
 
 export const plasticPollution = {
   id: "plastic-pollution",
@@ -50,6 +50,31 @@ export const plasticPollution = {
     </ol>
     <p>Submit your completed assignment for review and be ready to discuss your findings with your peers.</p>
   `,
-
+  quiz: `
+    <div id="quiz">
+      <!-- The quiz will be loaded here by the initQuiz function -->
+    </div>
+  `,
+  references: `
+    <h3>Learn More About Plastic Pollution</h3>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/qiXRTA0tYoI" allowfullscreen></iframe>
+    </div>
+    <h4>Additional Resources:</h4>
+    <ul>
+      <li><a href="https://www.nationalgeographic.com/environment/article/plastic-pollution" target="_blank">National Geographic: Plastic Pollution</a></li>
+      <li><a href="https://www.oceanconservancy.org/trash-free-seas/plastics-in-the-ocean/" target="_blank">Ocean Conservancy: Plastics in the Ocean</a></li>
+      <li><a href="https://www.plasticpollutioncoalition.org/" target="_blank">Plastic Pollution Coalition</a></li>
+    </ul>
+  `,
+  feedback: `
+    <h3>Your Feedback is Valuable!</h3>
+    <p>Please share your thoughts on the Plastic Pollution experiment:</p>
+    <form id="feedback-form">
+      <textarea id="feedback-text" rows="4" placeholder="Enter your feedback here..."></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  `,
   initSimulation: initPlasticPollutionSimulation,
+  initQuiz: initPlasticPollutionQuiz,
 };

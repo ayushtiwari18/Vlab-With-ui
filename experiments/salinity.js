@@ -1,5 +1,5 @@
-// experiments/salinity.js
 import { initSalinitySimulation } from "../simulations/salinitySimulation.js";
+import { initSalinityQuiz } from "../quizzes/salinityQuiz.js";
 
 export const salinity = {
   id: "salinity",
@@ -49,6 +49,31 @@ export const salinity = {
     </ol>
     <p>Submit your completed assignment for review and be prepared to discuss your findings with your group.</p>
   `,
-
+  quiz: `
+    <div id="quiz">
+      <!-- The quiz will be loaded here by the initQuiz function -->
+    </div>
+  `,
+  references: `
+    <h3>Learn More About Salinity</h3>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+    </div>
+    <h4>Additional Resources:</h4>
+    <ul>
+      <li><a href="https://oceanservice.noaa.gov/education/tutorial_currents/03currents3.html" target="_blank">NOAA: Salinity and Ocean Currents</a></li>
+      <li><a href="https://www.whoi.edu/know-your-ocean/oceanography/ocean-salinity/" target="_blank">Woods Hole Oceanographic Institution: Ocean Salinity</a></li>
+      <li><a href="https://www.sciencedaily.com/terms/ocean_salinity.htm" target="_blank">Science Daily: Ocean Salinity</a></li>
+    </ul>
+  `,
+  feedback: `
+    <h3>Your Feedback is Valuable!</h3>
+    <p>Please share your thoughts on the Salinity and Its Effects experiment:</p>
+   <form id="feedback-form">
+      <textarea id="feedback-text" rows="4" placeholder="Enter your feedback here..."></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  `,
   initSimulation: initSalinitySimulation,
+  initQuiz: initSalinityQuiz,
 };

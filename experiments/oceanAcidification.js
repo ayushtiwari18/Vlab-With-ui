@@ -1,5 +1,5 @@
-// experiments/oceanAcidification.js
 import { initOceanAcidificationSimulation } from "../simulations/oceanAcidificationSimulation.js";
+import { initOceanAcidificationQuiz } from "../quizzes/oceanAcidificationQuiz.js";
 
 export const oceanAcidification = {
   id: "ocean-acidification",
@@ -52,6 +52,33 @@ export const oceanAcidification = {
     </ol>
     <p>Submit your completed assignment for review and feedback. Be prepared to discuss your findings and ideas in a group setting.</p>
   `,
-
+  quiz: `
+    <div id="quiz">
+      <!-- The quiz will be loaded here by the initQuiz function -->
+    </div>
+  `,
+  references: `
+    <h3>Learn More About Ocean Acidification</h3>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/OY63X1fYGg8" allowfullscreen></iframe>
+    </div>
+    <h4>Additional Resources:</h4>
+    <ul>
+      <li><a href="https://www.noaa.gov/education/resource-collections/ocean-acidification">NOAA Ocean Acidification Resources</a></li>
+      <li><a href="https://www.ipcc.ch/sr15/chapter/ocean-acidification/">IPCC Special Report on Ocean and Cryosphere</a></li>
+      <li><a href="https://www.earthday.org/what-is-ocean-acidification/">Earth Day: What is Ocean Acidification?</a></li>
+      <li><a href="https://www.whoi.edu/know-your-ocean/ocean-acidification/">Woods Hole Oceanographic Institution: Ocean Acidification</a></li>
+      <li><a href="https://www.cnn.com/2020/09/30/world/ocean-acidification-climate-change-intl-scn/index.html">CNN: Ocean Acidification and Climate Change</a></li>
+    </ul>
+  `,
+  feedback: `
+    <h3>Your Feedback is Valuable!</h3>
+    <p>Please share your thoughts on the Ocean Acidification experiment:</p>
+    <form id="feedback-form">
+      <textarea id="feedback-text" rows="4" placeholder="Enter your feedback here..."></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  `,
   initSimulation: initOceanAcidificationSimulation,
+  initQuiz: initOceanAcidificationQuiz,
 };

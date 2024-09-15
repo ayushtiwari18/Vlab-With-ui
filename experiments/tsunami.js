@@ -1,4 +1,3 @@
-// experiments/tsunami.js
 import { initTsunamiSimulation } from "../simulations/tsunamiSimulation.js";
 
 export const tsunami = {
@@ -50,6 +49,35 @@ export const tsunami = {
     </ol>
     <p>Submit your completed assignment for review and be prepared to discuss your findings with your peers.</p>
   `,
-
+  quiz: `
+    <h3>Tsunami Quiz</h3>
+    <ol>
+      <li>What are the primary causes of tsunamis?</li>
+      <li>How do tsunamis differ from regular ocean waves in terms of speed and height?</li>
+      <li>What effects do tsunamis have on coastal regions?</li>
+      <li>Why is early detection important for tsunami mitigation?</li>
+      <li>Describe the process of a tsunami from generation to impact.</li>
+    </ol>
+  `,
+  references: `
+    <h3>Learn More About Tsunamis</h3>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+    </div>
+    <h4>Additional Resources:</h4>
+    <ul>
+      <li><a href="https://www.tsunami.gov/" target="_blank">NOAA Tsunami Website</a></li>
+      <li><a href="https://www.usgs.gov/special-topic/water-resources/science/tsunami" target="_blank">USGS: Tsunami Information</a></li>
+      <li><a href="https://www.icsu.org/what-we-do/interdisciplinary-bodies/tsunami" target="_blank">International Tsunami Information Center</a></li>
+    </ul>
+  `,
+  feedback: `
+    <h3>Your Feedback is Valuable!</h3>
+    <p>Please share your thoughts on the Tsunami: Understanding the Waves of Destruction experiment:</p>
+    <form id="feedback-form">
+      <textarea id="feedback-text" rows="4" placeholder="Enter your feedback here..."></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  `,
   initSimulation: initTsunamiSimulation,
 };

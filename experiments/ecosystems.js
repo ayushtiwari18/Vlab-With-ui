@@ -1,5 +1,5 @@
-// experiments/ecosystems.js
-import { initEcosystemsSimulation } from "../simulations/ecosystemsSimulation.js";
+import { initEcosystemsSimulation } from "../simulationsme/ecosystemsSimulation.js";
+import { initEcosystemsQuiz } from "../quizzes/EcosystemsQuiz.js";
 
 export const ecosystems = {
   id: "ecosystems",
@@ -49,6 +49,32 @@ export const ecosystems = {
     </ol>
     <p>Submit your completed assignment for review and be prepared to discuss your findings with your group.</p>
   `,
-
+  quiz: `
+    <div id="quiz">
+      <!-- The quiz will be loaded here by the initQuiz function -->
+    </div>
+  `,
+  references: `
+    <h3>Learn More About Ecosystems</h3>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/aGGBGcjdjXA" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/3s0LTDhqe5A" allowfullscreen></iframe>
+    </div>
+    <h4>Additional Resources:</h4>
+    <ul>
+      <li><a href="https://www.nationalgeographic.com/environment/article/ecosystems" target="_blank">National Geographic: Ecosystems</a></li>
+      <li><a href="https://www.ecology.com/what-is-an-ecosystem/" target="_blank">Ecology.com: What is an Ecosystem?</a></li>
+      <li><a href="https://www.worldwildlife.org/topics/ecosystems" target="_blank">World Wildlife Fund: Ecosystems</a></li>
+    </ul>
+  `,
+  feedback: `
+    <h3>Your Feedback is Valuable!</h3>
+    <p>Please share your thoughts on the Ecosystems experiment:</p>
+    <form id="feedback-form">
+      <textarea id="feedback-text" rows="4" placeholder="Enter your feedback here..."></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  `,
   initSimulation: initEcosystemsSimulation,
+  initQuiz: initEcosystemsQuiz,
 };

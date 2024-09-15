@@ -1,5 +1,5 @@
-// experiments/oceanCurrents.js
-import { initOceanCurrentsSimulation } from "../simulations/oceanCurrentSimulation.js";
+import { initOceanCurrentsSimulation } from "../simulationsme/oceanCurrentSimulation.js";
+import { initOceanCurrentsQuiz } from "../quizzes/OceanCurrentsQuiz.js";
 
 export const oceanCurrents = {
   id: "ocean-currents",
@@ -50,6 +50,32 @@ export const oceanCurrents = {
     </ol>
     <p>Submit your completed assignment for review and feedback. Be prepared to discuss your findings with your peers.</p>
   `,
-
+  quiz: `
+    <div id="quiz">
+      <!-- The quiz will be loaded here by the initQuiz function -->
+    </div>
+  `,
+  references: `
+    <h3>Learn More About Ocean Currents</h3>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/1Q5CXN7soQg" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/1Q5CXN7soQg" allowfullscreen></iframe>
+    </div>
+    <h4>Additional Resources:</h4>
+    <ul>
+      <li><a href="https://oceanservice.noaa.gov/education/tutorial_currents/welcome.html" target="_blank">NOAA: Ocean Currents Tutorial</a></li>
+      <li><a href="https://www.britannica.com/science/ocean-current" target="_blank">Britannica: Ocean Currents</a></li>
+      <li><a href="https://www.nationalgeographic.com/environment/article/ocean-currents" target="_blank">National Geographic: Ocean Currents</a></li>
+    </ul>
+  `,
+  feedback: `
+    <h3>Your Feedback is Valuable!</h3>
+    <p>Please share your thoughts on the Ocean Currents experiment:</p>
+   <form id="feedback-form">
+      <textarea id="feedback-text" rows="4" placeholder="Enter your feedback here..."></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  `,
   initSimulation: initOceanCurrentsSimulation,
+  initQuiz: initOceanCurrentsQuiz,
 };

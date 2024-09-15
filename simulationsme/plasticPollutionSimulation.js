@@ -166,16 +166,12 @@ export function initPlasticPollutionSimulation(container) {
       this.x = x;
       this.y = y;
       this.type = type;
-      this.size = type === "fish" ? 40 : type === "turtle" ? 60 : 80;
+      this.size = type === "fish" ? 15 : type === "turtle" ? 30 : 45;
       this.speed = type === "fish" ? 2 : type === "turtle" ? 1 : 1.5;
       this.direction = Math.random() * Math.PI * 2;
       this.health = 100;
       this.plasticIngested = 0;
       this.microplasticsIngested = 0;
-      this.image = new Image();
-      this.image.src = type === "fish" ? "/models/fish.png" : 
-                       type === "turtle" ? "/models/turtle.png" : 
-                       "models/shark1.png";
     }
 
     update() {
@@ -238,20 +234,31 @@ export function initPlasticPollutionSimulation(container) {
     }
 
     draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.direction);
-      ctx.drawImage(this.image, -this.size/2, -this.size/2, this.size, this.size);
-      ctx.restore();
+      ctx.fillStyle =
+        this.type === "fish"
+          ? "orange"
+          : this.type === "turtle"
+          ? "green"
+          : "gray";
+      ctx.beginPath();
+      if (this.type === "fish") {
+        ctx.moveTo(this.x + this.size, this.y);
+        ctx.lineTo(this.x - this.size, this.y - this.size / 2);
+        ctx.lineTo(this.x - this.size, this.y + this.size / 2);
+      } else {
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      }
+      ctx.closePath();
+      ctx.fill();
 
       // Health bar
       ctx.fillStyle = `rgb(${255 - this.health * 2.55}, ${
         this.health * 2.55
       }, 0)`;
       ctx.fillRect(
-        this.x - this.size/2,
-        this.y - this.size/2 - 10,
-        this.size * (this.health / 100),
+        this.x - this.size,
+        this.y - this.size - 10,
+        this.size * 2 * (this.health / 100),
         5
       );
     }
@@ -386,7 +393,7 @@ export function initPlasticPollutionSimulation(container) {
       microplastics.length;
     document.getElementById("animal-count").textContent = animals.length;
     const avgHealth =
-      animals.reduce((sum, animal) => sum + animal.health, 0) / animals.length || 0;
+      animals.reduce((sum, animal) => sum + animal.health, 0) / animals.length;
     document.getElementById("avg-animal-health").textContent =
       avgHealth.toFixed(2);
 

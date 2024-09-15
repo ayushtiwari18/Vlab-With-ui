@@ -1,5 +1,5 @@
-// experiments/oilSpill.js
 import { initOilSpillSimulation } from "../simulations/oilspillSimulation.js";
+import { initOilSpillQuiz } from "../quizzes/oilSpillQuiz.js";
 
 export const oilSpill = {
   id: "oil-spill",
@@ -55,6 +55,31 @@ export const oilSpill = {
     </ol>
     <p>Submit your completed assignment for review and be prepared to discuss your findings with your group.</p>
   `,
-
+  quiz: `
+    <div id="quiz">
+      <!-- The quiz will be loaded here by the initQuiz function -->
+    </div>
+  `,
+  references: `
+    <h3>Learn More About Oil Spills</h3>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+    </div>
+    <h4>Additional Resources:</h4>
+    <ul>
+      <li><a href="https://www.epa.gov/oil-spills-prevention-and-preparedness-regulations" target="_blank">EPA: Oil Spills Prevention and Preparedness</a></li>
+      <li><a href="https://www.nationalgeographic.com/environment/article/oil-spills" target="_blank">National Geographic: Oil Spills</a></li>
+      <li><a href="https://oceanservice.noaa.gov/hazards/oilspill/" target="_blank">NOAA: Oil Spills</a></li>
+    </ul>
+  `,
+  feedback: `
+    <h3>Your Feedback is Valuable!</h3>
+    <p>Please share your thoughts on the Oil Spill Containment and Cleanup experiment:</p>
+    <form id="feedback-form">
+      <textarea id="feedback-text" rows="4" placeholder="Enter your feedback here..."></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  `,
   initSimulation: initOilSpillSimulation,
+  initQuiz: initOilSpillQuiz,
 };

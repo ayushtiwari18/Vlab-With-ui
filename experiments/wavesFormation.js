@@ -1,5 +1,5 @@
-// experiments/waves.js
 import { initWavesSimulation } from "../simulations/wavesFormationSimulation.js";
+import { initWaveFormationQuiz } from "../quizzes/wavesFormationQuiz.js";
 
 export const waves = {
   id: "waves-formation",
@@ -50,6 +50,31 @@ export const waves = {
     </ol>
     <p>Submit your completed assignment for review and feedback. Be prepared to discuss your findings in a group discussion.</p>
   `,
-
+  quiz: `
+    <div id="quiz">
+      <!-- The quiz will be loaded here by the initQuiz function -->
+    </div>
+  `,
+  references: `
+    <h3>Learn More About Waves</h3>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+    </div>
+    <h4>Additional Resources:</h4>
+    <ul>
+      <li><a href="https://oceanservice.noaa.gov/education/tutorial_wave/intro.html" target="_blank">NOAA: Understanding Waves</a></li>
+      <li><a href="https://www.whoi.edu/know-your-ocean/ocean-topics/waves/" target="_blank">Woods Hole Oceanographic Institution: Waves</a></li>
+      <li><a href="https://www.britannica.com/science/ocean-wave" target="_blank">Encyclopedia Britannica: Ocean Wave</a></li>
+    </ul>
+  `,
+  feedback: `
+    <h3>Your Feedback is Valuable!</h3>
+    <p>Please share your thoughts on the Wave Formation experiment:</p>
+    <form id="feedback-form">
+      <textarea id="feedback-text" rows="4" placeholder="Enter your feedback here..."></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  `,
   initSimulation: initWavesSimulation,
+  initQuiz: initWaveFormationQuiz,
 };
